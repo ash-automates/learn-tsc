@@ -1,46 +1,35 @@
-//------------
-// interfaces
-//------------
+//--------------
+// type aliases
+//--------------
 
-interface Author {
+// example 1 - tuple
+
+type Rgb = [number, number, number];
+
+function getRandomColor(): Rgb {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
+
+  return [r, g, b];
+}
+
+const colorOne = getRandomColor();
+const colorTwo = getRandomColor();
+console.log(colorOne, colorTwo);
+
+// example 2 - object literal
+
+type User = {
   name: string;
-  avatar: string;
-}
-
-const authorOne: Author = { name: "mario", avatar: "/img/mario.png" };
-
-interface Post {
-  title: string;
-  body: string;
-  tags: string[];
-  created_at: Date;
-  author: Author;
-}
-
-const newPost = {
-  title: "my first post",
-  body: "something interesting",
-  tags: ["gaming", "tech"],
-  created_at: new Date(),
-  author: authorOne,
+  score: number;
 };
 
-//----------------------------
-// as function argument types
-//----------------------------
+const userOne: User = { name: "mario", score: 75 };
 
-function createPost(post: Post): void {
-  console.log(`created post ${post.title} by ${post.author.name}`);
+function formatUser(user: User): void {
+  console.log(`${user.name} has a score of ${user.score}.`);
 }
 
-// createPost({ title: 'a new post title' })
-createPost(newPost);
-
-//-------------
-// with arrays
-//-------------
-
-let posts: Post[] = [];
-
-// posts.push({ title: 'some title' })
-posts.push(newPost);
+formatUser(userOne);
+formatUser({ name: "yoshi", score: 100 });
